@@ -66,7 +66,24 @@ d3.csv("assets/data/data.csv").then((data) => {
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "blue")
-    .attr("opacity", ".5");
+    .attr("opacity", "0.5");
+
+   
+    
+//====================================================
+// add state abbrevations
+
+var stateAbbr = chartGroup.selectAll("g circle")
+    .data(data)
+    .enter()
+    .append("text")
+    .text(d => d.abbr)
+    .attr("dx", d => xLinearScale(d.poverty))
+    .attr("dy", d => yLinearScale(d.healthcare))
+    .classed("stateText", true);
+
+
+
 
     // Create axes labels
     chartGroup.append("text")
@@ -83,4 +100,7 @@ d3.csv("assets/data/data.csv").then((data) => {
       .text("In poverty (%)");
   }).catch(function(error) {
     console.log(error);
-});
+
+    
+    });
+        
