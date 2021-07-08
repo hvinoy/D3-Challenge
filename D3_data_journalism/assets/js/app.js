@@ -73,13 +73,14 @@ d3.csv("assets/data/data.csv").then((data) => {
 //====================================================
 // add state abbrevations
 
-var stateAbbr = chartGroup.selectAll("g circle")
+var stateAbbr = chartGroup.selectAll(null)
     .data(data)
     .enter()
     .append("text")
     .text(d => d.abbr)
     .attr("dx", d => xLinearScale(d.poverty))
     .attr("dy", d => yLinearScale(d.healthcare))
+    .attr("alignment-baseline","central")
     .classed("stateText", true);
 
 
