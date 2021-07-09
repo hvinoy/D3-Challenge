@@ -35,12 +35,16 @@ d3.csv("assets/data/data.csv").then((data) => {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([8, d3.max(data, d => d.poverty)])
-      .range([0, width]);
+    .domain([d3.min(data, d => d.poverty) * 0.9,
+      d3.max(data, d => d.poverty) * 1.1])
+    .range([0, width]);
+
+
 
     var yLinearScale = d3.scaleLinear()
-      .domain([3, d3.max(data, d => d.healthcare)])
-      .range([height, 0]);
+      .domain([d3.min(data, d => d.healthcare) - 1,
+      d3.max(data, d => d.healthcare) + 2])
+    .range([height, 0]);
 
     // Step 3: Create axis functions
     // ==============================
@@ -90,7 +94,7 @@ var stateAbbr = chartGroup.selectAll(null)
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height/2))
+      .attr("x", 0 - (height/2)-45)
       .attr("dy", "1em")
       .attr("class", "axisText")
       .text("Lacks Healthcare (%)");
